@@ -7,20 +7,44 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white p-6">
+<section class="max-w-4xl mx-auto py-16 px-6">
+    <h2 class="text-4xl font-black mb-10 text-gray-900 dark:text-white">Бо мо тамос гиред</h2>
 
-    <div class="max-w-md mx-auto mt-10 bg-gray-800 p-8 rounded-3xl shadow-2xl">
-        <h1 class="text-3xl font-bold mb-6">Бо мо тамос гиред</h1>
-        
-        <form class="space-y-4">
-            <input type="text" placeholder="Ному насаб" class="w-full p-4 rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500">
-            
-            <textarea placeholder="Саволи шумо..." class="w-full p-4 rounded-xl bg-gray-700 border border-gray-600 h-32 focus:outline-none focus:border-blue-500"></textarea>
-            
-            <button class="w-full bg-blue-600 py-4 rounded-xl font-bold hover:bg-blue-700 transition">
+    <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-gray-200 dark:border-white/10 shadow-lg">
+        <form class="space-y-6">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Ному насаб</label>
+                <input type="text" placeholder="Номи худро нависед..." 
+                    class="w-full p-4 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 focus:border-blue-500 outline-none transition-colors text-gray-900 dark:text-white">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Саволи шумо</label>
+                <textarea placeholder="Саволи худро дар ин ҷо нависед..." 
+                    class="w-full p-4 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-700 focus:border-blue-500 outline-none transition-colors h-32 text-gray-900 dark:text-white"></textarea>
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-transform active:scale-95">
                 Ирсол кардан
             </button>
         </form>
     </div>
+</section>
+<nav class="md:hidden fixed bottom-0 w-full bg-slate-900 border-t border-white/10 p-4 flex justify-between items-center z-[100]">
+    <a href="index.html" class="flex flex-col items-center text-gray-500 hover:text-white">
+        <i class="fas fa-home"></i> <span>Home</span>
+    </a>
+    <a href="courses.html" class="flex flex-col items-center text-gray-500 hover:text-white">
+        <i class="fas fa-book"></i> <span>Курсҳо</span>
+    </a>
+    <a href="contact.html" class="flex flex-col items-center text-gray-500 hover:text-white">
+        <i class="fas fa-envelope"></i> <span>Тамос</span>
+    </a>
+    <a href="profile.html" class="flex flex-col items-center text-blue-500">
+        <i class="fas fa-user"></i> <span>Profile</span>
+    </a>
+</nav>
 
 </body>
 </html>
