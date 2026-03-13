@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tg" id="app-html" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дарси 3: Present Continuous</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 p-4 pb-20">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-2xl font-black mb-6 text-center">Present Continuous</h1>
+
+        <div class="flex gap-2 mb-6 bg-slate-200 dark:bg-slate-800 p-1 rounded-full">
+            <button onclick="show('vocab')"
+                class=" flex-1 py-2 hover:bg-blue-600 rounded-full  text-white font-bold">Луғат</button>
+            <button onclick="show('quiz')" class="flex-1 py-2  hover:bg-blue-600 rounded-full font-bold">Тест
+                (15)</button>
+        </div>
+
+        <div id="vocab" class="tab-content space-y-2">
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Currently</b> — Айни ҳол</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>At the moment</b> — Дар ин лаҳза</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Right now</b> — Ҳамин ҳозир</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Listen</b> — Гӯш кардан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Look</b> — Нигоҳ кардан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Study</b> — Таҳсил кардан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Write</b> — Навиштан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Cook</b> — Пухтан (таом)</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Drive</b> — Ронидан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Wait</b> — Интизор шудан </div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Rain</b> — Боронидан</div>
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl"><b>Shine</b> — Дурахшидан</div>
+        </div>
+
+       <div id="quiz" class="tab-content hidden space-y-6">
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">1. She ____ (read) a book right now.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">is read</button>
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is reading</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">2. They ____ (play) football in the yard.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">are playing</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">is playing</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">3. Look! The sun ____ (shine) brightly.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is shining</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">shines</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">4. We ____ (eat) dinner at the moment.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">are eat</button>
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">are eating</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">5. He ____ (write) an email to his boss.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is writing</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">writing</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">6. I ____ (study) English currently.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">am studying</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">is studying</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">7. It ____ (rain) outside right now.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">are raining</button>
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is raining</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">8. My brother ____ (drive) to work.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is driving</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">drives</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">9. What ____ you (do) here?</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">is you doing</button>
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">are you doing</button>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow">
+        <p class="font-bold mb-3">10. The baby ____ (sleep) in the room.</p>
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="check(true, this)" class="p-2 border rounded-lg font-bold">is sleeping</button>
+            <button onclick="check(false, this)" class="p-2 border rounded-lg">are sleeping</button>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <script>
+        function show(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function check(isCorrect, btn) {
+            btn.style.backgroundColor = isCorrect ? '#22c55e' : '#ef4444';
+            btn.style.color = 'white';
+            btn.parentElement.querySelectorAll('button').forEach(b => b.disabled = true);
+        }
+    </script>
+</body>
+
+</html>
