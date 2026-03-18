@@ -1,229 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tg" id="html-root" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>English Learning</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Test | ErajAcademy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { primary: '#4F46E5', darkBg: '#0F172A', darkCard: '#1E293B' },
+                    borderRadius: { '4xl': '2rem' }
+                } 
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-tap-highlight-color: transparent; font-family: 'Inter', sans-serif; }
+        .option-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .option-card:active { transform: scale(0.95); }
+        .gradient-progress { background: linear-gradient(90deg, #4F46E5, #06B6D4); }
+    </style>
 </head>
+<body class="bg-[#F8FAFC] dark:bg-darkBg text-slate-900 dark:text-white min-h-screen flex flex-col">
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition">
+    <nav class="sticky top-0 z-50 bg-white/70 dark:bg-darkBg/70 backdrop-blur-xl border-b dark:border-white/5 px-4 py-3 flex items-center justify-between">
+        <a href="courses.html" class="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <div class="flex-1 px-4 text-center">
+            <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div id="progress" class="h-full gradient-progress transition-all duration-500" style="width: 5%"></div>
+            </div>
+            <p id="counter" class="text-[10px] font-black uppercase tracking-tighter mt-1 text-slate-400">Question 1 of 20</p>
+        </div>
+        <div id="timer" class="text-xs font-mono font-black bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 px-3 py-1.5 rounded-xl">10:00</div>
+    </nav>
 
-<div class="max-w-3xl mx-auto p-4">
+    <main class="flex-1 flex flex-col p-6 max-w-lg mx-auto w-full">
+        <div id="quiz-area" class="flex-1 flex flex-col">
+            <div class="mb-8 animate__animated animate__fadeIn">
+                <h3 class="text-indigo-500 font-bold text-sm mb-2 uppercase tracking-widest">Identify the correct answer:</h3>
+                <h2 id="question-text" class="text-2xl md:text-3xl font-black leading-tight text-slate-800 dark:text-white">
+                    What is the synonym of 'Quick'?
+                </h2>
+            </div>
 
-<h1 class="text-2xl font-bold text-center mb-4">English Learning</h1>
+            <div id="options" class="space-y-4 mb-8">
+                </div>
+        </div>
 
-<!-- Dark Mode -->
-<div class="text-right mb-4">
-<button onclick="toggleDark()" class="px-3 py-1 bg-black text-white rounded">
-🌙
-</button>
-</div>
+        <div id="result-area" class="hidden flex-1 flex flex-col items-center justify-center text-center animate__animated animate__zoomIn">
+            <div class="w-32 h-32 bg-indigo-600 text-white rounded-[3rem] flex items-center justify-center text-5xl shadow-2xl shadow-indigo-500/40 mb-8 rotate-3">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="text-4xl font-black mb-2">Excellent!</h2>
+            <p class="text-slate-500 mb-8">You have completed the English Proficiency Test.</p>
+            
+            <div class="bg-white dark:bg-darkCard w-full p-6 rounded-4xl border dark:border-white/5 shadow-xl mb-8">
+                <div class="flex justify-between items-center px-4">
+                    <div>
+                        <div class="text-4xl font-black text-indigo-600" id="final-score">0</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Correct</div>
+                    </div>
+                    <div class="h-12 w-[1px] bg-slate-100 dark:bg-slate-700"></div>
+                    <div>
+                        <div class="text-4xl font-black text-cyan-500" id="final-percent">0%</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Success</div>
+                    </div>
+                </div>
+            </div>
 
-<!-- Tabs -->
-<div class="flex gap-2 mb-4 justify-center">
+            <a href="index.html" class="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black shadow-lg active:scale-95 transition-all">Finish Course</a>
+        </div>
+    </main>
 
-<button id="btn-vocab"
-onclick="showTab('vocab')"
-class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm">
-Луғат
-</button>
+    <script>
+        const questions = [
+            { q: "How do you say 'Себ' in English?", a: ["Apple", "Orange", "Banana"], c: 0 },
+            { q: "Which one is a verb?", a: ["Beautiful", "Run", "Happiness"], c: 1 },
+            { q: "I ___ a student.", a: ["is", "am", "are"], c: 1 },
+            { q: "Yesterday I ___ to school.", a: ["go", "goes", "went"], c: 2 },
+            { q: "Opposite of 'Hot' is...", a: ["Warm", "Cold", "Fire"], c: 1 },
+            { q: "Plural of 'Child'?", a: ["Childs", "Children", "Childrens"], c: 1 },
+            { q: "She ___ pizza.", a: ["like", "likes", "liking"], c: 1 },
+            { q: "Which is a color?", a: ["Chair", "Blue", "Monday"], c: 1 },
+            { q: "How are you?", a: ["I am 15", "I am fine", "I am hungry"], c: 1 },
+            { q: "Ten + Five = ?", a: ["Twelve", "Fifteen", "Twenty"], c: 1 },
+            { q: "Identify the animal:", a: ["Car", "Cat", "Cup"], c: 1 },
+            { q: "___ you speak English?", a: ["Does", "Do", "Are"], c: 1 },
+            { q: "Monday comes after...", a: ["Sunday", "Tuesday", "Friday"], c: 0 },
+            { q: "We ___ watching TV now.", a: ["is", "am", "are"], c: 2 },
+            { q: "A person who teaches is a...", a: ["Doctor", "Teacher", "Driver"], c: 1 },
+            { q: "Opposite of 'Big'?", a: ["Large", "Small", "Long"], c: 1 },
+            { q: "I have ___ apple.", a: ["a", "an", "the"], c: 1 },
+            { q: "Where ___ you live?", a: ["do", "does", "are"], c: 0 },
+            { q: "English is ___.", a: ["easy", "easily", "easier"], c: 0 },
+            { q: "Good ___! (in the morning)", a: ["Night", "Afternoon", "Morning"], c: 2 }
+        ];
 
-<button id="btn-quiz"
-onclick="showTab('quiz')"
-class="px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded-full text-sm">
-Quiz
-</button>
+        let idx = 0, score = 0, timer = 600;
 
-</div>
+        function load() {
+            const data = questions[idx];
+            document.getElementById('question-text').innerText = data.q;
+            document.getElementById('counter').innerText = `Question ${idx + 1} of 20`;
+            document.getElementById('progress').style.width = `${((idx + 1) / 20) * 100}%`;
+            
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
+            
+            data.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "option-card w-full p-5 bg-white dark:bg-darkCard rounded-3xl border-2 border-slate-100 dark:border-white/5 text-left font-bold flex items-center justify-between shadow-sm";
+                btn.innerHTML = `<span>${opt}</span><div class="w-6 h-6 rounded-full border-2 border-slate-200 dark:border-slate-600"></div>`;
+                btn.onclick = () => select(i, btn);
+                optDiv.appendChild(btn);
+            });
+        }
 
-<!-- VOCAB -->
+        function select(i, btn) {
+            const allBtns = document.querySelectorAll('.option-card');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
 
-<div id="vocab" class="tab-content">
+            if(i === questions[idx].c) {
+                score++;
+                btn.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-500/10');
+                btn.querySelector('div').className = "w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-[10px] shadow-lg";
+                btn.querySelector('div').innerHTML = '<i class="fas fa-check"></i>';
+            } else {
+                btn.classList.add('border-red-500', 'bg-red-50', 'dark:bg-red-500/10');
+                btn.querySelector('div').className = "w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white text-[10px]";
+                btn.querySelector('div').innerHTML = '<i class="fas fa-times"></i>';
+            }
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            setTimeout(() => {
+                idx++;
+                if(idx < questions.length) load(); else finish();
+            }, 1000);
+        }
 
-<div class="card">Always — Ҳамеша</div>
-<div class="card">Usually — Одатан</div>
-<div class="card">Often — Аксар вақт</div>
-<div class="card">Sometimes — Баъзан</div>
-<div class="card">Never — Ҳеҷ гоҳ</div>
-<div class="card">Wake up — Бедор шудан</div>
-<div class="card">Get up — Хестан</div>
-<div class="card">Have breakfast — Наҳорӣ хӯрдан</div>
-<div class="card">Commute — Рафтуомад</div>
+  function finish() {
+    document.getElementById('quiz-area').classList.add('hidden');
+    document.getElementById('result-area').classList.remove('hidden');
+    
+    document.getElementById('final-score').innerText = score;
+    document.getElementById('final-percent').innerText = Math.round((score/20)*100) + "%";
 
-</div>
-
-</div>
-
-<!-- QUIZ -->
-
-<div id="quiz" class="tab-content hidden">
-
-<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-
-<h2 class="text-lg font-bold mb-3">Quiz (10 Questions)</h2>
-
-<!-- 1 -->
-<div class="q">
-<p>1. She ____ (work).</p>
-<button onclick="check(this,false)">work</button>
-<button onclick="check(this,true)">works</button>
-</div>
-
-<!-- 2 -->
-<div class="q">
-<p>2. He ____ football.</p>
-<button onclick="check(this,true)">plays</button>
-<button onclick="check(this,false)">play</button>
-</div>
-
-<!-- 3 -->
-<div class="q">
-<p>3. They ____ to school.</p>
-<button onclick="check(this,true)">go</button>
-<button onclick="check(this,false)">goes</button>
-</div>
-
-<!-- 4 -->
-<div class="q">
-<p>4. She ____ breakfast.</p>
-<button onclick="check(this,true)">has</button>
-<button onclick="check(this,false)">have</button>
-</div>
-
-<!-- 5 -->
-<div class="q">
-<p>5. He ____ early.</p>
-<button onclick="check(this,true)">wakes</button>
-<button onclick="check(this,false)">wake</button>
-</div>
-
-<!-- 6 -->
-<div class="q">
-<p>6. We ____ every day.</p>
-<button onclick="check(this,true)">study</button>
-<button onclick="check(this,false)">studies</button>
-</div>
-
-<!-- 7 -->
-<div class="q">
-<p>7. She ____ English.</p>
-<button onclick="check(this,true)">learns</button>
-<button onclick="check(this,false)">learn</button>
-</div>
-
-<!-- 8 -->
-<div class="q">
-<p>8. They ____ lunch.</p>
-<button onclick="check(this,true)">eat</button>
-<button onclick="check(this,false)">eats</button>
-</div>
-
-<!-- 9 -->
-<div class="q">
-<p>9. He ____ a car.</p>
-<button onclick="check(this,true)">drives</button>
-<button onclick="check(this,false)">drive</button>
-</div>
-
-<!-- 10 -->
-<div class="q">
-<p>10. She ____ coffee.</p>
-<button onclick="check(this,true)">drinks</button>
-<button onclick="check(this,false)">drink</button>
-</div>
-
-<div id="result" class="mt-4 font-bold text-center"></div>
-
-</div>
-
-</div>
-
-</div>
-
-<style>
-
-.card{
-background:white;
-padding:8px;
-border-radius:8px;
-border:1px solid #ddd;
+    // ИН ҶО МАЪЛУМОТРО БАРОИ КОРБАР ЗАХИРА МЕКУНЕМ
+    const currentUser = localStorage.getItem('userName'); // Номи корбарро мегирем
+    if (currentUser) {
+        // Холҳои навро захира мекунем (масалан 1 ҷавоби дуруст = 10 хол)
+        const totalXP = score * 10; 
+        localStorage.setItem('userXP_' + currentUser, totalXP);
+        localStorage.setItem('userSolved_' + currentUser, score);
+    }
 }
 
-.dark .card{
-background:#1f2937;
-border:1px solid #444;
-}
+        setInterval(() => {
+            if(timer > 0) {
+                timer--;
+                const m = Math.floor(timer/60), s = timer%60;
+                document.getElementById('timer').innerText = `${m}:${s<10?'0'+s:s}`;
+            }
+        }, 1000);
 
-.q{
-margin-bottom:12px;
-}
-
-.q button{
-display:block;
-width:100%;
-margin-top:4px;
-padding:6px;
-border:1px solid #ccc;
-border-radius:6px;
-text-align:left;
-}
-
-.q button:hover{
-background:#f3f4f6;
-}
-
-.dark .q button:hover{
-background:#374151;
-}
-
-</style>
-
-<script>
-
-let score = 0
-
-function showTab(tab){
-
-document.querySelectorAll(".tab-content")
-.forEach(el=>el.classList.add("hidden"))
-
-document.getElementById(tab)
-.classList.remove("hidden")
-
-}
-
-function check(btn,correct){
-
-const res=document.getElementById("result")
-
-if(correct){
-
-score++
-btn.style.background="lightgreen"
-res.innerHTML="Score: "+score
-
-}else{
-
-btn.style.background="salmon"
-
-}
-
-}
-
-function toggleDark(){
-
-document.documentElement.classList.toggle("dark")
-
-}
-
-</script>
-
+        load();
+        if (localStorage.getItem('theme') === 'dark') document.getElementById('html-root').classList.add('dark');
+    </script>
 </body>
 </html>

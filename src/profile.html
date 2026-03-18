@@ -1,48 +1,203 @@
 <!DOCTYPE html>
-<html lang="tg">
+<html lang="tg" id="html-root" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Профили Ман | ErajAcademy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { primary: '#4F46E5', darkBg: '#0F172A', darkCard: '#1E293B' },
+                    borderRadius: { '4xl': '2.5rem' }
+                } 
+            }
+        }
+    </script>
+    <style>
+        .profile-gradient { background: linear-gradient(135deg, #4F46E5, #06B6D4); }
+        .glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); }
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .modal-active { display: flex !important; animation: fadeIn 0.3s ease; }
+    </style>
 </head>
-<body class="bg-black text-white pb-24">
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-white pb-32 transition-colors duration-500">
 
-    <main class="p-8">
-        <div class="flex flex-col items-center mt-10">
-            <div class="w-32 h-32 bg-blue-900 rounded-full flex items-center justify-center text-5xl font-bold mb-6 border-4 border-blue-500">
-                M
+    <div class="profile-gradient pt-16 pb-40 px-6 rounded-b-[4xl] shadow-2xl relative overflow-hidden text-center">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+        
+        <div class="relative z-10 flex flex-col items-center">
+            <div class="relative mb-6">
+                <div class="w-32 h-32 rounded-[2.5rem] border-4 border-white/30 p-1 bg-white/10 backdrop-blur-md overflow-hidden shadow-2xl">
+                    <img id="user-avatar" src="" class="w-full h-full rounded-[2.2rem] object-cover">
+                </div>
+                <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 border-4 border-white dark:border-darkBg rounded-full"></div>
             </div>
-            <h2 class="text-2xl font-bold">Муҳаммадҷон</h2> <p class="text-gray-400">Донишҷӯи фаъол</p>
+
+            <h1 id="display-name" class="text-3xl font-black text-white tracking-tight">Боргирӣ...</h1>
+            <p id="display-status" class="text-indigo-100 text-sm font-medium mt-2 opacity-80 uppercase tracking-widest">Student</p>
+            
+            <button onclick="openSettings()" class="mt-6 glass-card px-6 py-2 rounded-2xl text-white text-xs font-black flex items-center gap-2 hover:bg-white/20 transition-all active:scale-95">
+                <i class="fas fa-sliders-h"></i> ТАНЗИМОТИ ПРОФИЛ
+            </button>
+        </div>
+    </div>
+
+    <main class="max-w-md mx-auto -mt-20 px-6 relative z-20 space-y-6">
+        
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white dark:bg-darkCard p-5 rounded-[2rem] shadow-xl border dark:border-white/5 text-center">
+                <div id="stat-solved" class="text-2xl font-black text-primary">0</div>
+                <div class="text-[9px] uppercase font-bold text-slate-400">Дарсҳо</div>
+            </div>
+            <div class="bg-white dark:bg-darkCard p-5 rounded-[2rem] shadow-xl border dark:border-white/5 text-center">
+                <div id="stat-xp" class="text-2xl font-black text-green-500">0</div>
+                <div class="text-[9px] uppercase font-bold text-slate-400">Холҳо</div>
+            </div>
+            <div class="bg-white dark:bg-darkCard p-5 rounded-[2rem] shadow-xl border dark:border-white/5 text-center">
+                <div class="text-2xl font-black text-orange-500">#1</div>
+                <div class="text-[9px] uppercase font-bold text-slate-400">Рейтинг</div>
+            </div>
         </div>
 
-        <div class="mt-10 space-y-4">
-            <div class="bg-gray-900 p-4 rounded-xl flex justify-between">
-                <span>Дарсҳои гузашта:</span>
-                <span class="font-bold text-blue-400">14/20</span>
+        <div class="bg-white dark:bg-darkCard rounded-[2.5rem] p-8 shadow-xl border dark:border-white/5">
+            <h3 class="text-lg font-black mb-6 flex items-center justify-between">
+                <span>Дастовардҳои Ман</span>
+                <i class="fas fa-award text-yellow-500"></i>
+            </h3>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/40 rounded-3xl">
+                    <div class="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="font-black text-sm text-slate-700 dark:text-slate-200">Оғози Тез</div>
+                        <div class="text-[10px] text-slate-400 uppercase font-bold">Сабти ном шуд</div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-900 p-4 rounded-xl flex justify-between">
-                <span>Рейтинг (XP):</span>
-                <span class="font-bold text-yellow-400">850</span>
-            </div>
+        </div>
+
+        <div class="space-y-3">
+            <button onclick="toggleTheme()" class="w-full py-5 bg-white dark:bg-darkCard rounded-3xl font-bold flex items-center justify-center gap-3 border dark:border-white/5 shadow-md active:scale-95 transition-all">
+                <i class="fas fa-moon dark:text-indigo-400"></i>
+                <span>Дизайни Сайт (Dark/Light)</span>
+            </button>
+            <button onclick="logout()" class="w-full py-5 bg-red-50 dark:bg-red-900/10 text-red-500 rounded-3xl font-bold flex items-center justify-center gap-3 active:scale-95 transition-all">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Баромадан</span>
+            </button>
         </div>
     </main>
 
-    <nav class="fixed bottom-0 w-full bg-slate-900 border-t border-white/10 p-4 flex justify-between items-center z-50">
-        <a href="index.html" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-home text-xl"></i>
-            <span class="text-[10px] mt-1">Home</span>
-        </a>
-        <a href="frontend.html" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-laptop-code text-xl"></i>
-            <span class="text-[10px] mt-1">Frontend</span>
-        </a>
-        <a href="profile.html" class="flex flex-col items-center text-blue-500">
-            <div class="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-xs font-bold border border-white">M</div>
-            <span class="text-[10px] mt-1 font-bold">Profile</span>
-        </a>
+    <div id="settings-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-6 bg-black/70 backdrop-blur-md">
+        <div class="bg-white dark:bg-darkCard w-full max-w-sm rounded-[3rem] p-8 shadow-2xl border dark:border-white/10 animate__animated animate__zoomIn">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-black">Таҳрир</h2>
+                <button onclick="closeSettings()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-2">Номи Шумо</label>
+                    <input type="text" id="edit-name-input" class="w-full p-5 bg-slate-100 dark:bg-slate-800 rounded-2xl border-2 border-transparent focus:border-primary outline-none transition-all dark:text-white font-bold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-2">Мақом (Bio)</label>
+                    <input type="text" id="edit-status-input" class="w-full p-5 bg-slate-100 dark:bg-slate-800 rounded-2xl border-2 border-transparent focus:border-primary outline-none transition-all dark:text-white font-bold">
+                </div>
+                <button onclick="saveChanges()" class="w-full py-5 bg-primary text-white rounded-[2rem] font-black shadow-lg shadow-primary/30 active:scale-95 transition-all mt-4">
+                    ЗАХИРА КАРДАН
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-6 left-6 right-6 h-20 bg-white/80 dark:bg-darkCard/80 backdrop-blur-xl rounded-[2.5rem] flex justify-around items-center z-[100] shadow-2xl border dark:border-white/10 px-4">
+        <a href="index.html" class="text-slate-400 p-4"><i class="fas fa-home text-xl"></i></a>
+        <a href="courses.html" class="text-slate-400 p-4"><i class="fas fa-layer-group text-xl"></i></a>
+        <a href="./allquiz/quiz.html" class="text-slate-400 p-4"><i class="fas fa-bolt text-xl"></i></a>
+        <a href="profile.html" class="text-primary bg-primary/10 rounded-2xl p-4"><i class="fas fa-user-astronaut text-xl"></i></a>
     </nav>
 
+    <script>
+        // 1. БОРГИРИИ МАЪЛУМОТ
+        function loadProfile() {
+            const userName = localStorage.getItem('userName') || "Меҳмон";
+            const userStatus = localStorage.getItem('userStatus_' + userName) || "Advanced Student";
+            const userXP = localStorage.getItem('userXP_' + userName) || "0";
+            const userSolved = localStorage.getItem('userSolved_' + userName) || "0";
+
+            document.getElementById('display-name').innerText = userName;
+            document.getElementById('display-status').innerText = userStatus;
+            document.getElementById('stat-xp').innerText = userXP;
+            document.getElementById('stat-solved').innerText = userSolved;
+            
+            // Сурати автоматӣ аз рӯи ном
+            document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${userName}&background=4F46E5&color=fff&size=256&bold=true`;
+        }
+
+        // 2. ТАНЗИМОТ
+        function openSettings() {
+            const currentName = localStorage.getItem('userName') || "Меҳмон";
+            const currentStatus = localStorage.getItem('userStatus_' + currentName) || "Advanced Student";
+            
+            document.getElementById('edit-name-input').value = currentName;
+            document.getElementById('edit-status-input').value = currentStatus;
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+
+        function closeSettings() {
+            document.getElementById('settings-modal').style.display = 'none';
+        }
+
+        function saveChanges() {
+            const oldName = localStorage.getItem('userName');
+            const newName = document.getElementById('edit-name-input').value.trim();
+            const newStatus = document.getElementById('edit-status-input').value.trim();
+
+            if (!newName) return alert("Номро нависед!");
+
+            // Интиқоли холҳо ба номи нав
+            if (oldName !== newName) {
+                const xp = localStorage.getItem('userXP_' + oldName) || "0";
+                const solved = localStorage.getItem('userSolved_' + oldName) || "0";
+                localStorage.setItem('userXP_' + newName, xp);
+                localStorage.setItem('userSolved_' + newName, solved);
+                localStorage.setItem('userName', newName);
+            }
+
+            localStorage.setItem('userStatus_' + newName, newStatus);
+            
+            closeSettings();
+            loadProfile();
+            alert("Тағйирот захира шуд!");
+        }
+
+        // 3. ДИГАР ФУНКСИЯҲО
+        function toggleTheme() {
+            document.getElementById('html-root').classList.toggle('dark');
+            localStorage.setItem('theme', document.getElementById('html-root').classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        function logout() {
+            if(confirm("Оё мехоҳед бароед?")) {
+                localStorage.removeItem('isRegistered');
+                window.location.href = 'register.html';
+            }
+        }
+
+        // INIT
+        window.onload = () => {
+            loadProfile();
+            if (localStorage.getItem('theme') === 'dark') document.getElementById('html-root').classList.add('dark');
+        };
+    </script>
 </body>
 </html>

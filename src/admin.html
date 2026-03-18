@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tg" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Guard | ErajAcademy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .blur-bg { backdrop-filter: blur(20px); }
+        .admin-card { transition: all 0.3s ease; }
+        .admin-card:hover { transform: translateY(-5px); border-color: #4F46E5; }
+    </style>
+</head>
+<body class="bg-[#0b0f1a] text-white font-sans min-h-screen">
+
+    <div id="admin-login" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-6 blur-bg">
+        <div class="w-full max-w-sm bg-[#161b2c] p-8 rounded-[2.5rem] border border-white/10 text-center shadow-2xl">
+            <div class="w-20 h-20 bg-indigo-500/20 text-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2 class="text-2xl font-black mb-2">Вуруд ба Админ</h2>
+            <p class="text-slate-400 text-sm mb-8">Пароли махфии худро ворид кунед</p>
+            
+            <input type="password" id="admin-pass" class="w-full p-5 bg-white/5 border-2 border-transparent focus:border-indigo-500 rounded-2xl outline-none mb-4 text-center text-xl tracking-[0.5rem]" placeholder="****">
+            
+            <button onclick="checkAdminPass()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-bold transition-all shadow-lg shadow-indigo-500/20">
+                Тасдиқ кардан
+            </button>
+            <p id="error-msg" class="text-red-500 text-xs mt-4 hidden">Парол хатост! Бори дигар кӯшиш кунед.</p>
+        </div>
+    </div>
+
+    <div id="admin-content" class="hidden opacity-0 transition-opacity duration-1000 max-w-4xl mx-auto p-6">
+        <header class="flex justify-between items-center mb-12 pt-6">
+            <div>
+                <h1 class="text-3xl font-black tracking-tight">Панели <span class="text-indigo-500 text-gradient">Админ</span></h1>
+                <p class="text-slate-500 text-xs mt-1 uppercase font-bold tracking-widest">Eraj Academy Management</p>
+            </div>
+            <button onclick="location.reload()" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-red-500/20 hover:text-red-500 transition-all">
+                <i class="fas fa-power-off"></i>
+            </button>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-[#161b2c] p-8 rounded-[2.5rem] border border-white/5 admin-card">
+                <div class="text-slate-500 text-[10px] font-black mb-2 uppercase">Total Users</div>
+                <div id="total-count" class="text-5xl font-black">0</div>
+            </div>
+            <div class="bg-[#161b2c] p-8 rounded-[2.5rem] border border-white/5 admin-card border-l-4 border-l-green-500">
+                <div class="text-slate-500 text-[10px] font-black mb-2 uppercase">Online Now</div>
+                <div class="text-5xl font-black text-green-500">1</div>
+            </div>
+            <div class="bg-[#161b2c] p-8 rounded-[2.5rem] border border-white/5 admin-card">
+                <div class="text-slate-500 text-[10px] font-black mb-2 uppercase">Platform Status</div>
+                <div class="text-xl font-black text-indigo-400 mt-2">Active 24/7</div>
+            </div>
+        </div>
+
+        <div class="bg-[#161b2c] rounded-[3rem] border border-white/5 overflow-hidden shadow-2xl">
+            <div class="p-8 border-b border-white/5 flex justify-between items-center bg-white/5">
+                <h3 class="font-black text-lg">Рӯйхати Одамон</h3>
+                <span class="text-[10px] bg-indigo-500 px-3 py-1 rounded-full font-bold uppercase">Навтаринҳо</span>
+            </div>
+            <div id="users-container" class="divide-y divide-white/5">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // ПАРОЛИ ТУ: Инро метавонӣ иваз кунӣ
+        const SECRET_KEY = "2009"; 
+
+        function checkAdminPass() {
+            const passInput = document.getElementById('admin-pass').value;
+            const loginBox = document.getElementById('admin-login');
+            const content = document.getElementById('admin-content');
+            const error = document.getElementById('error-msg');
+
+            if(passInput === SECRET_KEY) {
+                loginBox.classList.add('hidden');
+                content.classList.remove('hidden');
+                setTimeout(() => content.classList.add('opacity-100'), 100);
+                loadUsers();
+            } else {
+                error.classList.remove('hidden');
+                document.getElementById('admin-pass').value = "";
+            }
+        }
+
+        function loadUsers() {
+            const container = document.getElementById('users-container');
+            const users = JSON.parse(localStorage.getItem('allUsers') || '[]');
+            document.getElementById('total-count').innerText = users.length;
+
+            if(users.length === 0) {
+                container.innerHTML = `<div class="p-20 text-center text-slate-500 font-bold">Ҳанӯз касе сабти ном нашудааст.</div>`;
+                return;
+            }
+
+            container.innerHTML = users.reverse().map(u => `
+                <div class="p-6 flex justify-between items-center hover:bg-white/[0.02] transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center font-black text-lg shadow-lg">
+                            ${u.name.charAt(0)}
+                        </div>
+                        <div>
+                            <div class="font-black text-base">${u.name}</div>
+                            <div class="text-xs text-slate-500 tracking-wide">${u.contact}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[10px] font-black text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-lg inline-block mb-1">${u.time}</div>
+                        <div class="text-[8px] text-slate-600 uppercase font-bold">Registered</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
