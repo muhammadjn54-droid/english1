@@ -7,11 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
+  if (localStorage.getItem('isRegistered') !== 'true') {
+    window.location.href = 'register.html';
+  }
+</script>
+    <script>
         tailwind.config = {
             darkMode: 'class',
             theme: { extend: { colors: { primary: '#4F46E5' } } }
         }
     </script>
+    <script>
+    // Агар корбар қайд нашуда бошад, ӯро ба саҳифаи регистратсия мефиристем
+    if (localStorage.getItem('isRegistered') !== 'true') {
+        window.location.href = 'register.html';
+    }
+</script>
 </head>
 <body class="bg-slate-50 dark:bg-[#0f172a] min-h-screen flex items-center justify-center p-6">
 
@@ -62,5 +73,6 @@
         window.location.href = "index.html"; 
     }
 </script>
+
 </body>
 </html>

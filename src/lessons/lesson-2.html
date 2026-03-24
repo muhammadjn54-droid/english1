@@ -16,7 +16,7 @@
 <body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 pb-32 transition-colors duration-300">
 
     <div class="fixed top-0 w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md p-4 flex items-center justify-between border-b dark:border-white/5">
-        <a href="courses.html" class="flex items-center gap-2 font-bold text-primary">
+        <a href="../courses.html" class="flex items-center gap-2 font-bold text-primary">
             <i class="fas fa-arrow-left"></i> Курсҳо
         </a>
         <span class="font-black">Дарси №2</span>
@@ -29,7 +29,7 @@
     <main class="max-w-4xl mx-auto pt-24 px-4">
         <div class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black mb-8 border-4 border-white dark:border-slate-800">
             <video class="w-full h-full object-cover" controls>
-                <source src="allwidio/2.mp4" type="video/mp4">
+                <source src="../allwidio/2.mp4" type="video/mp4">
                 Браузери шумо видеоро дастгирӣ намекунад.
             </video>
         </div>
@@ -63,10 +63,10 @@
     </main>
 
     <nav class="md:hidden fixed bottom-6 left-6 right-6 h-16 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md rounded-2xl flex justify-around items-center z-[100] shadow-xl border dark:border-white/10">
-        <a href="index.html" class="text-slate-400 p-3"><i class="fas fa-home text-lg"></i></a>
-        <a href="courses.html" class="text-primary p-3"><i class="fas fa-book-open text-lg"></i></a>
-        <a href="quiz.html" class="text-slate-400 p-3"><i class="fas fa-vial text-lg"></i></a>
-        <a href="profile.html" class="text-slate-400 p-3"><i class="fas fa-user text-lg"></i></a>
+        <a href="../index.html" class="text-slate-400 p-3"><i class="fas fa-home text-lg"></i></a>
+        <a href="../courses.html" class="text-primary p-3"><i class="fas fa-book-open text-lg"></i></a>
+        <a href="../allquiz/quiz.html" class="text-slate-400 p-3"><i class="fas fa-vial text-lg"></i></a>
+        <a href="../profile.html" class="text-slate-400 p-3"><i class="fas fa-user text-lg"></i></a>
     </nav>
 
     <script>
@@ -75,7 +75,10 @@
             html.classList.toggle('dark');
             localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
         }
-        if (localStorage.getItem('theme') === 'dark') document.getElementById('html-root').classList.add('dark');
+        // Check local storage for theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.getElementById('html-root').classList.add('dark');
+        }
     </script>
 </body>
 </html>
